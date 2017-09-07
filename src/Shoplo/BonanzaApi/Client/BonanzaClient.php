@@ -9,6 +9,7 @@ use GuzzleHttp\HandlerStack;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\UriInterface;
 use Shoplo\BonanzaApi\Credentials\CredentialsInterface;
 use Shoplo\BonanzaApi\Request\FetchTokenRequest;
 use Shoplo\BonanzaApi\Request\GetBoothItemsRequest;
@@ -44,7 +45,7 @@ class BonanzaClient
 	/**
 	 * @var string
 	 */
-	private $apiUrl = 'https://api.bonanza.com/api_requests/secure_request';
+	private $apiUrl = 'http://api.bonanza.com/api_requests/secure_request';
 
 	/**
 	 * @var Client
@@ -81,6 +82,11 @@ class BonanzaClient
 				$request = $request->withHeader(self::HEADER_DEV_ID, $this->credentials->getDevId());
 				if ($this->credentials->getCertId())
 				{
+					/** @var UriInterface $uri */
+					$uri = $request->getUri();
+					$uri->withScheme('https');
+
+					$request = $request->withUri($uri);
 					$request = $request->withHeader(self::HEADER_CERT_ID, $this->credentials->getCertId());
 				}
 
