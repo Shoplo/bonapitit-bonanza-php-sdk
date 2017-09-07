@@ -11,7 +11,7 @@ abstract class BaseResponse
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $timestamp;
 

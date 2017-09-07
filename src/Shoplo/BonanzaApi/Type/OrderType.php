@@ -54,7 +54,7 @@ class OrderType
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $createdTime;
 
@@ -89,7 +89,7 @@ class OrderType
 	/**
 	 * @var string
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $paidTime;
 
@@ -110,7 +110,7 @@ class OrderType
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $shippedTime;
 

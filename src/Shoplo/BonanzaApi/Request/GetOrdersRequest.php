@@ -20,28 +20,28 @@ class GetOrdersRequest
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $createTimeFrom;
 
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $createTimeTo;
 
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $modTimeFrom;
 
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $modTimeTo;
 
@@ -67,14 +67,14 @@ class GetOrdersRequest
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $soldTimeFrom;
 
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:sP'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
 	public $soldTimeTo;
 

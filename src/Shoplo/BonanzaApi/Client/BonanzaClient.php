@@ -6,10 +6,11 @@ namespace Shoplo\BonanzaApi\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
+use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
+use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\UriInterface;
 use Shoplo\BonanzaApi\Credentials\CredentialsInterface;
 use Shoplo\BonanzaApi\Request\FetchTokenRequest;
 use Shoplo\BonanzaApi\Request\GetBoothItemsRequest;
@@ -45,7 +46,7 @@ class BonanzaClient
 	/**
 	 * @var string
 	 */
-	private $apiUrl = 'http://api.bonanza.com/api_requests/secure_request';
+	private $apiUrl = 'api.bonanza.com/api_requests/';
 
 	/**
 	 * @var Client
@@ -73,20 +74,31 @@ class BonanzaClient
 	{
 		$this->credentials = $credentials;
 		$this->callbackUrl = $callbackUrl;
-		$this->serializer  = SerializerBuilder::create()->build();
+		$this->serializer  = SerializerBuilder::create()
+		                                      ->setPropertyNamingStrategy(
+			                                      new SerializedNameAnnotationStrategy(
+				                                      new IdenticalPropertyNamingStrategy()
+			                                      )
+		                                      )
+		                                      ->build();
 
 		$stack = HandlerStack::create();
+
+		if ($credentials->getCertId())
+		{
+			$this->apiUrl = 'https://' . $this->apiUrl . '/secure_request';
+		}
+		else
+		{
+			$this->apiUrl = 'http://' . $this->apiUrl . '/standard_request';
+		}
 
 		$stack->push(function (callable $handler) {
 			return function (RequestInterface $request, array $options) use ($handler) {
 				$request = $request->withHeader(self::HEADER_DEV_ID, $this->credentials->getDevId());
+
 				if ($this->credentials->getCertId())
 				{
-					/** @var UriInterface $uri */
-					$uri = $request->getUri();
-					$uri->withScheme('https');
-
-					$request = $request->withUri($uri);
 					$request = $request->withHeader(self::HEADER_CERT_ID, $this->credentials->getCertId());
 				}
 
@@ -101,39 +113,6 @@ class BonanzaClient
 	}
 
 	/**
-	 * @param string $function
-	 * @param mixed $data
-	 * @param array $headers
-	 * @param bool $isMultipart
-	 *
-	 * @return mixed
-	 */
-	public function post($function, $data, array $headers = [], $isMultipart = false): BaseResponse
-	{
-		if (is_object($data))
-		{
-			$data = $this->serializer->serialize($data, 'array');
-		}
-
-		$data = [
-			lcfirst($function) => $data,
-		];
-
-		$rsp = $this->client->request(
-			'POST',
-			$this->apiUrl,
-			[
-				($isMultipart ? 'multipart' : 'form_params') => $data,
-				'headers'                                    => $headers,
-			]
-		);
-
-		$class = sprintf('Shoplo\\BonanazaApi\\Response\\%s', ucfirst($function));
-
-		return $this->serializer->deserialize($rsp->getBody(), $class, 'json');
-	}
-
-	/**
 	 * @return CredentialsInterface
 	 */
 	public function getCredentials()
@@ -144,6 +123,32 @@ class BonanzaClient
 	public function fetchToken(FetchTokenRequest $request): FetchTokenResponse
 	{
 		return $this->post(__FUNCTION__, $request);
+	}
+
+	/**
+	 * @param string $function
+	 * @param mixed $data
+	 * @param array $headers
+	 * @param bool $isMultipart
+	 *
+	 * @return mixed
+	 */
+	public function post($function, $data, array $headers = []): BaseResponse
+	{
+		$data = $this->serializer->serialize($data, 'json');
+
+		$rsp = $this->client->request(
+			'POST',
+			$this->apiUrl,
+			[
+				'body'    => lcfirst($function) . '=' . $data,
+				'headers' => $headers,
+			]
+		);
+
+		$class = sprintf('Shoplo\\BonanzaApi\\Response\\%s', ucfirst($function) . 'Response');
+
+		return $this->serializer->deserialize((string)$rsp->getBody(), $class, 'json');
 	}
 
 	public function getBoothItems(GetBoothItemsRequest $request): GetBoothItemsResponse
