@@ -1,5 +1,5 @@
 {
-    "name": "Shoplo/bonapiti-bonanza-php-sdk",
+    "name": "shoplo/bonapiti-bonanza-php-sdk",
     "description": "PHP SDK for Bonanza Marketplace and its \"Bonapitit\" REST API.",
     "type": "library",
     "require": {
