@@ -1,0 +1,19 @@
+{
+    "name": "Shoplo/bonapiti-bonanza-php-sdk",
+    "description": "PHP SDK for Bonanza Marketplace and its \"Bonapitit\" REST API.",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "jms/serializer": "^1.8"
+    },
+    "authors": [
+        {
+            "name": "marrek13",
+            "email": "marrek13@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": { "Shoplo\\BonanzaApi\\": "src/Shoplo/BonanzaApi" }
+    }
+}
