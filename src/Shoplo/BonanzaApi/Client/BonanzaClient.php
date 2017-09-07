@@ -12,12 +12,14 @@ use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\RequestInterface;
 use Shoplo\BonanzaApi\Credentials\CredentialsInterface;
+use Shoplo\BonanzaApi\Exception\SecureRequestException;
 use Shoplo\BonanzaApi\Request\FetchTokenRequest;
 use Shoplo\BonanzaApi\Request\GetBoothItemsRequest;
 use Shoplo\BonanzaApi\Request\GetCategoriesRequest;
 use Shoplo\BonanzaApi\Request\GetCategoryTraitsRequest;
 use Shoplo\BonanzaApi\Request\GetOrdersRequest;
 use Shoplo\BonanzaApi\Request\GetSingleItemRequest;
+use Shoplo\BonanzaApi\Request\GetUserProfileRequest;
 use Shoplo\BonanzaApi\Request\GetUserRequest;
 use Shoplo\BonanzaApi\Response\BaseResponse;
 use Shoplo\BonanzaApi\Response\FetchTokenResponse;
@@ -26,6 +28,7 @@ use Shoplo\BonanzaApi\Response\GetCategoriesResponse;
 use Shoplo\BonanzaApi\Response\GetCategoryTraitsResponse;
 use Shoplo\BonanzaApi\Response\GetOrdersResponse;
 use Shoplo\BonanzaApi\Response\GetSingleItemResponse;
+use Shoplo\BonanzaApi\Response\GetUserProfileResponse;
 use Shoplo\BonanzaApi\Response\GetUserResponse;
 
 class BonanzaClient
@@ -84,15 +87,6 @@ class BonanzaClient
 
 		$stack = HandlerStack::create();
 
-		if ($credentials->getCertId())
-		{
-			$this->apiUrl = 'https://' . $this->apiUrl . '/secure_request';
-		}
-		else
-		{
-			$this->apiUrl = 'http://' . $this->apiUrl . '/standard_request';
-		}
-
 		$stack->push(function (callable $handler) {
 			return function (RequestInterface $request, array $options) use ($handler) {
 				$request = $request->withHeader(self::HEADER_DEV_ID, $this->credentials->getDevId());
@@ -122,7 +116,7 @@ class BonanzaClient
 
 	public function fetchToken(FetchTokenRequest $request): FetchTokenResponse
 	{
-		return $this->post(__FUNCTION__, $request);
+		return $this->post(__FUNCTION__, $request, true);
 	}
 
 	/**
@@ -133,13 +127,26 @@ class BonanzaClient
 	 *
 	 * @return mixed
 	 */
-	public function post($function, $data, array $headers = []): BaseResponse
+	private function post($function, $data, $isSecure = false, array $headers = []): BaseResponse
 	{
+		if ($isSecure)
+		{
+			if (!$this->credentials->getCertId())
+			{
+				throw new SecureRequestException("You have to provide app certificate ID to make that secure call");
+			}
+			$url = 'https://' . $this->apiUrl . '/secure_request';
+		}
+		else
+		{
+			$url = 'http://' . $this->apiUrl . '/standard_request';
+		}
+
 		$data = $this->serializer->serialize($data, 'json');
 
 		$rsp = $this->client->request(
 			'POST',
-			$this->apiUrl,
+			$url,
 			[
 				'body'    => lcfirst($function) . '=' . $data,
 				'headers' => $headers,
@@ -153,7 +160,7 @@ class BonanzaClient
 
 	public function getBoothItems(GetBoothItemsRequest $request): GetBoothItemsResponse
 	{
-		return $this->post(__FUNCTION__, $request);
+		return $this->post(__FUNCTION__, $request, true);
 	}
 
 	public function getCategories(GetCategoriesRequest $request): GetCategoriesResponse
@@ -168,7 +175,7 @@ class BonanzaClient
 
 	public function getOrders(GetOrdersRequest $request): GetOrdersResponse
 	{
-		return $this->post(__FUNCTION__, $request);
+		return $this->post(__FUNCTION__, $request, true);
 	}
 
 	public function getSingleItem(GetSingleItemRequest $request): GetSingleItemResponse
@@ -177,6 +184,11 @@ class BonanzaClient
 	}
 
 	public function getUser(GetUserRequest $request): GetUserResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
+	}
+
+	public function getUserProfile(GetUserProfileRequest $request): GetUserProfileResponse
 	{
 		return $this->post(__FUNCTION__, $request);
 	}
