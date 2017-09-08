@@ -11,6 +11,8 @@ class ShipToLocationsType
 	/**
 	 * @var string
 	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\RegionType
+	 *
 	 * @Serializer\Type("string")
 	 */
 	public $region;
@@ -24,6 +26,8 @@ class ShipToLocationsType
 
 	/**
 	 * @var string
+	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\ShippingType
 	 *
 	 * @Serializer\Type("string")
 	 */

@@ -46,6 +46,8 @@ class ShippingCostSummaryType
 	/**
 	 * @var string
 	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\ShippingType
+	 *
 	 * @Serializer\Type("string")
 	 */
 	public $shippingType;

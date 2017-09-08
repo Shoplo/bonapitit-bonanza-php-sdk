@@ -8,6 +8,14 @@ use JMS\Serializer\Annotation as Serializer;
 
 class TraitArrayType
 {
+	/**
+	 * @var string
+	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\HtmlInputType
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $htmlInputType;
 
 	/**
 	 * @var int

@@ -55,12 +55,18 @@ class GetOrdersRequest
 	/**
 	 * @var string
 	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\UserRole
+	 *
 	 * @Serializer\Type("string")
 	 */
 	public $orderRole;
 
 	/**
-	 * @var
+	 * @var string
+	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\OrderStatusType
+	 *
+	 * @Serializer\Type("string")
 	 */
 	public $orderStatus;
 

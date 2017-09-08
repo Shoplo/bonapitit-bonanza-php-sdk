@@ -6,33 +6,26 @@ namespace Shoplo\BonanzaApi\Type;
 
 use JMS\Serializer\Annotation as Serializer;
 
-class ReturnPolicyType
+class ProductListingDetailsType
 {
 	/**
 	 * @var string
 	 *
 	 * @Serializer\Type("string")
 	 */
-	public $description;
+	public $mpn;
 
 	/**
 	 * @var string
 	 *
 	 * @Serializer\Type("string")
 	 */
-	public $returnsAcceptedOption;
-
-	/**
-	 * @var int
-	 *
-	 * @Serializer\Type("int")
-	 */
-	public $returnsWithinOption;
+	public $isbn;
 
 	/**
 	 * @var string
 	 *
 	 * @Serializer\Type("string")
 	 */
-	public $shippingCostPaidByOption;
+	public $upc;
 }

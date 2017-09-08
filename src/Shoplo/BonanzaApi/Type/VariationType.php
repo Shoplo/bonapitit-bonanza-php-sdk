@@ -9,6 +9,13 @@ use JMS\Serializer\Annotation as Serializer;
 class VariationType
 {
 	/**
+	 * @var double
+	 *
+	 * @Serializer\Type("double")
+	 */
+	public $price;
+
+	/**
 	 * @var int
 	 *
 	 * @Serializer\Type("int")

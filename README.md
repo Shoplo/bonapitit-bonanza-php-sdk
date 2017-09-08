@@ -10,5 +10,7 @@ Package currently has got support for calling Bonanza's methods:
 * getOrders
 * getSingleItem
 * getUser
+* addFixedPriceItem
+* reviseFixedPriceItem
 
 Please refer to the Bonanza's API docs here: https://api.bonanza.com/docs

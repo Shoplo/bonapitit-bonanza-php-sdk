@@ -61,6 +61,8 @@ class OrderType
 	/**
 	 * @var string
 	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\UserRole
+	 *
 	 * @Serializer\Type("string")
 	 */
 	public $creatingUserRole;

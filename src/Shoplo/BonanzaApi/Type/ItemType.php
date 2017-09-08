@@ -102,6 +102,8 @@ class ItemType
 	/**
 	 * @var string[]
 	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\PaymentMethodsType
+	 *
 	 * @Serializer\Type("array<string>")
 	 */
 	public $paymentMethods;

@@ -25,6 +25,8 @@ class UserType
 	/**
 	 * @var string
 	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\FeedbackRatingStarType
+	 *
 	 * @Serializer\Type("string")
 	 */
 	public $feedbackRatingStar;

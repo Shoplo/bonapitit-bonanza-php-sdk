@@ -4,7 +4,7 @@
 namespace Shoplo\BonanzaApi\Enums;
 
 
-class ItemStatus
+class ItemStatusType
 {
 	const FOR_SALE       = 'for_sale';
 	const READY_TO_POST  = 'ready_to_post';

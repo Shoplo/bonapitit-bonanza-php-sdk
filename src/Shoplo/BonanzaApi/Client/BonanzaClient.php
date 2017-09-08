@@ -8,11 +8,13 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\RequestInterface;
 use Shoplo\BonanzaApi\Credentials\CredentialsInterface;
 use Shoplo\BonanzaApi\Exception\SecureRequestException;
+use Shoplo\BonanzaApi\Request\AddFixedPriceItemRequest;
 use Shoplo\BonanzaApi\Request\FetchTokenRequest;
 use Shoplo\BonanzaApi\Request\GetBoothItemsRequest;
 use Shoplo\BonanzaApi\Request\GetCategoriesRequest;
@@ -21,6 +23,8 @@ use Shoplo\BonanzaApi\Request\GetOrdersRequest;
 use Shoplo\BonanzaApi\Request\GetSingleItemRequest;
 use Shoplo\BonanzaApi\Request\GetUserProfileRequest;
 use Shoplo\BonanzaApi\Request\GetUserRequest;
+use Shoplo\BonanzaApi\Request\ReviseFixedPriceItemRequest;
+use Shoplo\BonanzaApi\Response\AddFixedPriceItemResponse;
 use Shoplo\BonanzaApi\Response\BaseResponse;
 use Shoplo\BonanzaApi\Response\FetchTokenResponse;
 use Shoplo\BonanzaApi\Response\GetBoothItemsResponse;
@@ -30,6 +34,7 @@ use Shoplo\BonanzaApi\Response\GetOrdersResponse;
 use Shoplo\BonanzaApi\Response\GetSingleItemResponse;
 use Shoplo\BonanzaApi\Response\GetUserProfileResponse;
 use Shoplo\BonanzaApi\Response\GetUserResponse;
+use Shoplo\BonanzaApi\Response\ReviseFixedPriceItemResponse;
 
 class BonanzaClient
 {
@@ -142,7 +147,10 @@ class BonanzaClient
 			$url = 'http://' . $this->apiUrl . '/standard_request';
 		}
 
-		$data = $this->serializer->serialize($data, 'json');
+		$context = new SerializationContext();
+		$context->setSerializeNull(false);
+
+		$data = $this->serializer->serialize($data, 'json', $context);
 
 		$rsp = $this->client->request(
 			'POST',
@@ -191,5 +199,15 @@ class BonanzaClient
 	public function getUserProfile(GetUserProfileRequest $request): GetUserProfileResponse
 	{
 		return $this->post(__FUNCTION__, $request);
+	}
+
+	public function reviseFixedPriceItem(ReviseFixedPriceItemRequest $request): ReviseFixedPriceItemResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
+	}
+
+	public function addFixedPriceItem(AddFixedPriceItemRequest $request): AddFixedPriceItemResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
 	}
 }
