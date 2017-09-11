@@ -62,11 +62,6 @@ class BonanzaClient
 	private $client;
 
 	/**
-	 * @var string
-	 */
-	private $callbackUrl;
-
-	/**
 	 * @var SerializerInterface
 	 */
 	private $serializer;
@@ -75,13 +70,11 @@ class BonanzaClient
 	 * @param SerializerInterface $serializer
 	 * @param $devId
 	 * @param $certID
-	 * @param $callbackUrl
 	 *
 	 */
-	public function __construct(CredentialsInterface $credentials, $callbackUrl = null)
+	public function __construct(CredentialsInterface $credentials)
 	{
 		$this->credentials = $credentials;
-		$this->callbackUrl = $callbackUrl;
 		$this->serializer  = SerializerBuilder::create()
 		                                      ->setPropertyNamingStrategy(
 			                                      new SerializedNameAnnotationStrategy(
@@ -140,11 +133,11 @@ class BonanzaClient
 			{
 				throw new SecureRequestException("You have to provide app certificate ID to make that secure call");
 			}
-			$url = 'https://' . $this->apiUrl . '/secure_request';
+			$url = 'https://' . $this->apiUrl . 'secure_request';
 		}
 		else
 		{
-			$url = 'http://' . $this->apiUrl . '/standard_request';
+			$url = 'http://' . $this->apiUrl . 'standard_request';
 		}
 
 		$context = new SerializationContext();
