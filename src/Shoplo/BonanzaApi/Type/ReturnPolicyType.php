@@ -30,9 +30,23 @@ class ReturnPolicyType
 	public $returnsWithinOption;
 
 	/**
+	 * @var int
+	 *
+	 * @Serializer\Type("int")
+	 */
+	public $returnsWithin;
+
+	/**
 	 * @var string
 	 *
 	 * @Serializer\Type("string")
 	 */
 	public $shippingCostPaidByOption;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $shippingCostPaidBy;
 }

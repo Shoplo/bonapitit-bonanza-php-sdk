@@ -137,9 +137,11 @@ class ItemType
 	public $primaryCategoryName;
 
 	/**
-	 * @var string
+	 * @var array
 	 *
-	 * @Serializer\Type("string")
+	 * Provides the upc/mpn/isbn value in the form: ["upc/mpn/isbn", "value"]
+	 *
+	 * @Serializer\Type("array")
 	 */
 	public $productListingDetails;
 
