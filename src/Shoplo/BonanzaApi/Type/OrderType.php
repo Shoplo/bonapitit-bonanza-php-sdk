@@ -128,6 +128,13 @@ class OrderType
 	 *
 	 * @Serializer\Type("double")
 	 */
+	public $taxAmount;
+
+	/**
+	 * @var double
+	 *
+	 * @Serializer\Type("double")
+	 */
 	public $total;
 
 	/**
