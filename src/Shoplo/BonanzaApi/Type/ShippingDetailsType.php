@@ -39,6 +39,8 @@ class ShippingDetailsType
 	/**
 	 * @var string
 	 *
+	 * Allowed values in \Shoplo\BonanzaApi\Enums\ShippingServiceType
+	 *
 	 * @Serializer\Type("string")
 	 */
 	public $shippingService;

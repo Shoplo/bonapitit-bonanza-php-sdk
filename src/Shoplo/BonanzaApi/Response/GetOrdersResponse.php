@@ -12,7 +12,7 @@ class GetOrdersResponse extends BaseResponse
 	/**
 	 * @var GetOrdersReponseType
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\GetOrdersResponseType")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\GetOrdersReponseType")
 	 */
 	public $getOrdersResponse;
 }
