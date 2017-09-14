@@ -161,7 +161,7 @@ class BonanzaClient
 
 	public function getBoothItems(GetBoothItemsRequest $request): GetBoothItemsResponse
 	{
-		return $this->post(__FUNCTION__, $request, true);
+		return $this->post(__FUNCTION__, $request, $request->requesterCredentials !== null);
 	}
 
 	public function getCategories(GetCategoriesRequest $request): GetCategoriesResponse
