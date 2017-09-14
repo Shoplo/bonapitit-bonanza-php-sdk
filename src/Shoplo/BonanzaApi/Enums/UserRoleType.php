@@ -4,7 +4,7 @@
 namespace Shoplo\BonanzaApi\Enums;
 
 
-class UserRole
+class UserRoleType
 {
 	const BUYER  = 'buyer';
 	const SELLER = 'seller';
