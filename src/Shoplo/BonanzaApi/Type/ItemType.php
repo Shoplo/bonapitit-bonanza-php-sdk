@@ -79,6 +79,22 @@ class ItemType
 	public $itemID;
 
 	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $parentItemID;
+
+	/**
+	 * @var string
+	 *
+	 * SKU in other words, returned in getOrders call
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $sellerInventoryID;
+
+	/**
 	 * @var ItemSpecificsType
 	 *
 	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ItemSpecificsType")
