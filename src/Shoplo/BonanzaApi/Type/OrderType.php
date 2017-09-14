@@ -89,7 +89,7 @@ class OrderType
 	public $orderStatus;
 
 	/**
-	 * @var string
+	 * @var \DateTime
 	 *
 	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
 	 */
