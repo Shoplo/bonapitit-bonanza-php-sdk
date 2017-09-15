@@ -5,9 +5,8 @@ namespace Shoplo\BonanzaApi\Request;
 
 
 use JMS\Serializer\Annotation as Serializer;
-use Shoplo\BonanzaApi\Type\ItemType;
 
-class ReviseFixedPriceItemRequest
+class ReviseFixedPriceItemRequest extends AddFixedPriceItemRequest
 {
 	/**
 	 * @var int
@@ -22,11 +21,4 @@ class ReviseFixedPriceItemRequest
 	 * @Serializer\Type("boolean")
 	 */
 	public $discardOldVariations;
-
-	/**
-	 * @var ItemType
-	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ItemType")
-	 */
-	public $item;
 }

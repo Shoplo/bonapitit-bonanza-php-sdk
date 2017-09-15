@@ -24,6 +24,7 @@ use Shoplo\BonanzaApi\Request\GetSingleItemRequest;
 use Shoplo\BonanzaApi\Request\GetUserProfileRequest;
 use Shoplo\BonanzaApi\Request\GetUserRequest;
 use Shoplo\BonanzaApi\Request\ReviseFixedPriceItemRequest;
+use Shoplo\BonanzaApi\Request\UpdateBoothRequest;
 use Shoplo\BonanzaApi\Response\AddFixedPriceItemResponse;
 use Shoplo\BonanzaApi\Response\BaseResponse;
 use Shoplo\BonanzaApi\Response\FetchTokenResponse;
@@ -35,6 +36,7 @@ use Shoplo\BonanzaApi\Response\GetSingleItemResponse;
 use Shoplo\BonanzaApi\Response\GetUserProfileResponse;
 use Shoplo\BonanzaApi\Response\GetUserResponse;
 use Shoplo\BonanzaApi\Response\ReviseFixedPriceItemResponse;
+use Shoplo\BonanzaApi\Response\UpdateBoothResponse;
 
 class BonanzaClient
 {
@@ -200,6 +202,11 @@ class BonanzaClient
 	}
 
 	public function addFixedPriceItem(AddFixedPriceItemRequest $request): AddFixedPriceItemResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
+	}
+
+	public function updateBooth(UpdateBoothRequest $request): UpdateBoothResponse
 	{
 		return $this->post(__FUNCTION__, $request, true);
 	}

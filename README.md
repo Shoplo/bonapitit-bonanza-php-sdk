@@ -12,5 +12,6 @@ Package currently has got support for calling Bonanza's methods:
 * getUser
 * addFixedPriceItem
 * reviseFixedPriceItem
+* updateBooth
 
 Please refer to the Bonanza's API docs here: https://api.bonanza.com/docs
