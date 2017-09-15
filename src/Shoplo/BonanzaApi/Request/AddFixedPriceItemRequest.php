@@ -5,7 +5,7 @@ namespace Shoplo\BonanzaApi\Request;
 
 
 use JMS\Serializer\Annotation as Serializer;
-use Shoplo\BonanzaApi\Type\ItemType;
+use Shoplo\BonanzaApi\Type\AddItemType;
 use Shoplo\BonanzaApi\Type\RequesterCredentialsType;
 
 class AddFixedPriceItemRequest
@@ -18,9 +18,9 @@ class AddFixedPriceItemRequest
 	public $requesterCredentials;
 
 	/**
-	 * @var ItemType
+	 * @var AddItemType
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ItemType")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\AddItemType")
 	 */
 	public $item;
 }
