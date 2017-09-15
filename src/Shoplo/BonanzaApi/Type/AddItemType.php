@@ -37,6 +37,13 @@ class AddItemType
 	public $itemSpecifics;
 
 	/**
+	 * @var PictureDetailsType
+	 *
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\PictureDetailsType")
+	 */
+	public $pictureDetails;
+
+	/**
 	 * @var double
 	 *
 	 * @Serializer\Type("double")
