@@ -23,6 +23,13 @@ class ReturnPolicyType
 	public $returnsAcceptedOption;
 
 	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $returnsAccepted;
+
+	/**
 	 * @var int
 	 *
 	 * @Serializer\Type("int")
