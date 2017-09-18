@@ -30,9 +30,9 @@ class AddItemType
 	public $obo;
 
 	/**
-	 * @var ItemSpecificsType
+	 * @var AddItemSpecificsType
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ItemSpecificsType")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\AddItemSpecificsType")
 	 */
 	public $itemSpecifics;
 
