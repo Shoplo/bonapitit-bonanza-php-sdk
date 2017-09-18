@@ -23,16 +23,16 @@ class AddShippingDetailsType
 	public $insuranceDetails;
 
 	/**
-	 * @var InternationalShippingServiceOptionType
+	 * @var InternationalShippingServiceOptionType[]
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\InternationalShippingServiceOptionType")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\InternationalShippingServiceOptionType>")
 	 */
 	public $internationalShippingServiceOption;
 
 	/**
-	 * @var ShippingServiceOptionsType
+	 * @var ShippingServiceOptionsType[]
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ShippingServiceOptionsType")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\ShippingServiceOptionsType>")
 	 */
 	public $shippingServiceOptions;
 }
