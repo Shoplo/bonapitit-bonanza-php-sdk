@@ -11,7 +11,7 @@ class TransactionType
 	/**
 	 * @var BuyerType
 	 *
-	 * @Serializer\Ty   pe("string")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\BuyerType")
 	 */
 	public $buyer;
 

@@ -54,7 +54,7 @@ class OrderType
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s\Z'>")
 	 */
 	public $createdTime;
 
@@ -68,9 +68,9 @@ class OrderType
 	public $creatingUserRole;
 
 	/**
-	 * @var ItemArrayType[]
+	 * @var OrderItemArrayType[]
 	 *
-	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\ItemArrayType>")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\OrderItemArrayType>")
 	 */
 	public $itemArray;
 
@@ -91,7 +91,7 @@ class OrderType
 	/**
 	 * @var \DateTime
 	 *
-	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s.u\Z'>")
+	 * @Serializer\Type("DateTime<'Y-m-d\TH:i:s\Z'>")
 	 */
 	public $paidTime;
 
@@ -138,9 +138,9 @@ class OrderType
 	public $total;
 
 	/**
-	 * @var TransactionArrayType[]
+	 * @var TransactionArrayType
 	 *
-	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\TransactionArrayType>")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\TransactionArrayType")
 	 */
 	public $transactionArray;
 }

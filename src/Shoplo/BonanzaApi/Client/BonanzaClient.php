@@ -156,8 +156,6 @@ class BonanzaClient
 			]
 		);
 
-		var_dump((string)$rsp->getBody());
-
 		$class = sprintf('Shoplo\\BonanzaApi\\Response\\%s', ucfirst($function) . 'Response');
 
 		return $this->serializer->deserialize((string)$rsp->getBody(), $class, 'json');
