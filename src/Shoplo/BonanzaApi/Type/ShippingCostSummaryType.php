@@ -67,9 +67,9 @@ class ShippingCostSummaryType
 	public $shippingOz;
 
 	/**
-	 * @var ShippingServicesType
+	 * @var ShippingServicesType[]
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ShippingServicesType")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\ShippingServicesType>")
 	 */
 	public $shippingServices;
 }

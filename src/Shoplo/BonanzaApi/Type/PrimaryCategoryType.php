@@ -14,4 +14,11 @@ class PrimaryCategoryType
 	 * @Serializer\Type("int")
 	 */
 	public $categoryId;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $categoryName;
 }

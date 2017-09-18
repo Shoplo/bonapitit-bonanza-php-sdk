@@ -11,7 +11,7 @@ class VariationsType
 	/**
 	 * @var VariationType[]
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\VariationType")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\VariationType>")
 	 */
 	public $variation;
 }

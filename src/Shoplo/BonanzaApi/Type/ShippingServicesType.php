@@ -23,9 +23,23 @@ class ShippingServicesType
 	public $carrier;
 
 	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $shippingType;
+
+	/**
 	 * @var double
 	 *
 	 * @Serializer\Type("double")
 	 */
 	public $shippingServiceCost;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $code;
 }

@@ -25,7 +25,7 @@ class VariationType
 	/**
 	 * @var NameValueListType[]
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\NameValueListType")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\NameValueListType>")
 	 */
 	public $nameValueList;
 

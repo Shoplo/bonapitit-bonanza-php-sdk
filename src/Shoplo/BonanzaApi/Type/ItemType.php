@@ -95,9 +95,9 @@ class ItemType
 	public $sellerInventoryID;
 
 	/**
-	 * @var ItemSpecificsType
+	 * @var ItemSpecificsType[]
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ItemSpecificsType")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\ItemSpecificsType>")
 	 */
 	public $itemSpecifics;
 
@@ -139,18 +139,11 @@ class ItemType
 	public $postalCode;
 
 	/**
-	 * @var string
+	 * @var PrimaryCategoryType
 	 *
-	 * @Serializer\Type("string")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\PrimaryCategoryType")
 	 */
-	public $primaryCategoryID;
-
-	/**
-	 * @var string
-	 *
-	 * @Serializer\Type("string")
-	 */
-	public $primaryCategoryName;
+	public $primaryCategory;
 
 	/**
 	 * @var array
@@ -190,9 +183,9 @@ class ItemType
 	public $shippingCostSummary;
 
 	/**
-	 * @var ShipToLocationsType
+	 * @var ShipToLocationsType[]
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\ShipToLocationsType")
+	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\ShipToLocationsType>")
 	 */
 	public $shipToLocations;
 

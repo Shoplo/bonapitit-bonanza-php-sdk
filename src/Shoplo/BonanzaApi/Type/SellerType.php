@@ -36,4 +36,32 @@ class SellerType
 	 * @Serializer\Type("string")
 	 */
 	public $userId;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $sellerUserName;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $availableForChat;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $membershipLevel;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
+	 */
+	public $userPicture;
 }

@@ -9,9 +9,9 @@ use JMS\Serializer\Annotation as Serializer;
 class ItemSpecificsType
 {
 	/**
-	 * @var NameValueListType[]
+	 * @var NameValueListType
 	 *
-	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\NameValueListType>")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\NameValueListType")
 	 */
 	public $nameValueList;
 }
