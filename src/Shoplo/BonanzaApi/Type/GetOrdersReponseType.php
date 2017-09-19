@@ -17,11 +17,11 @@ class GetOrdersReponseType extends BaseResponseType
 	public $hasMoreOrders;
 
 	/**
-	 * @var PaginationOutputType
+	 * @var PaginationResultType
 	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\PaginationOutputType")
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\PaginationResultType")
 	 */
-	public $paginationOutput;
+	public $paginationResult;
 
 	/**
 	 * @var OrderArrayType[]

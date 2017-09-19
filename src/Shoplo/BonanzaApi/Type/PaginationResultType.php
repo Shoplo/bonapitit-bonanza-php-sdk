@@ -6,19 +6,19 @@ namespace Shoplo\BonanzaApi\Type;
 
 use JMS\Serializer\Annotation as Serializer;
 
-class PaginationOutputType extends PaginationInputType
+class PaginationResultType extends PaginationInputType
 {
 	/**
 	 * @var int
 	 *
 	 * @Serializer\Type("int")
 	 */
-	public $totalEntries;
+	public $totalNumberOfEntries;
 
 	/**
 	 * @var int
 	 *
 	 * @Serializer\Type("int")
 	 */
-	public $totalPages;
+	public $totalNumberOfPages;
 }
