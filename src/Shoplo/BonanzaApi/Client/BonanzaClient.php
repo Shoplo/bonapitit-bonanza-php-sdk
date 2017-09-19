@@ -15,6 +15,7 @@ use Psr\Http\Message\RequestInterface;
 use Shoplo\BonanzaApi\Credentials\CredentialsInterface;
 use Shoplo\BonanzaApi\Exception\SecureRequestException;
 use Shoplo\BonanzaApi\Request\AddFixedPriceItemRequest;
+use Shoplo\BonanzaApi\Request\EndFixedPriceItemRequest;
 use Shoplo\BonanzaApi\Request\FetchTokenRequest;
 use Shoplo\BonanzaApi\Request\GetBoothItemsRequest;
 use Shoplo\BonanzaApi\Request\GetCategoriesRequest;
@@ -27,6 +28,7 @@ use Shoplo\BonanzaApi\Request\ReviseFixedPriceItemRequest;
 use Shoplo\BonanzaApi\Request\UpdateBoothRequest;
 use Shoplo\BonanzaApi\Response\AddFixedPriceItemResponse;
 use Shoplo\BonanzaApi\Response\BaseResponse;
+use Shoplo\BonanzaApi\Response\EndFixedPriceItemResponse;
 use Shoplo\BonanzaApi\Response\FetchTokenResponse;
 use Shoplo\BonanzaApi\Response\GetBoothItemsResponse;
 use Shoplo\BonanzaApi\Response\GetCategoriesResponse;
@@ -202,6 +204,11 @@ class BonanzaClient
 	}
 
 	public function addFixedPriceItem(AddFixedPriceItemRequest $request): AddFixedPriceItemResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
+	}
+
+	public function endFixedPriceItem(EndFixedPriceItemRequest $request): EndFixedPriceItemResponse
 	{
 		return $this->post(__FUNCTION__, $request, true);
 	}
