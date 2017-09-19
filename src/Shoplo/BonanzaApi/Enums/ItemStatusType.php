@@ -6,10 +6,11 @@ namespace Shoplo\BonanzaApi\Enums;
 
 class ItemStatusType
 {
-	const FOR_SALE       = 'for_sale';
-	const READY_TO_POST  = 'ready_to_post';
-	const MISSING_FIELDS = 'missing_fields';
-	const RESERVED       = 'reserved';
-	const SOLD           = 'sold';
-	const PENDING_PICKUP = 'pending_pickup';
+	const ACTIVE                  = 'Active';
+	const CANCELED                = 'Canceled';
+	const MISSING_REQUIRED_FIELDS = 'Missing required fields';
+	const READY_FOR_SALE          = 'Ready for sale';
+	const RESERVED                = 'Reserved';
+	const SOLD                    = 'Sold';
+	const UNKNOWN                 = 'Unknown';
 }
