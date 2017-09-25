@@ -9,6 +9,7 @@ Package currently has got support for calling Bonanza's methods:
 * getCategoryTraits
 * getOrders
 * getSingleItem
+* getUnlistedItem
 * getUser
 * addFixedPriceItem
 * reviseFixedPriceItem

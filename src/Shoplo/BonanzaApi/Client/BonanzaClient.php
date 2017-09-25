@@ -22,6 +22,7 @@ use Shoplo\BonanzaApi\Request\GetCategoriesRequest;
 use Shoplo\BonanzaApi\Request\GetCategoryTraitsRequest;
 use Shoplo\BonanzaApi\Request\GetOrdersRequest;
 use Shoplo\BonanzaApi\Request\GetSingleItemRequest;
+use Shoplo\BonanzaApi\Request\GetUnlistedItemRequest;
 use Shoplo\BonanzaApi\Request\GetUserProfileRequest;
 use Shoplo\BonanzaApi\Request\GetUserRequest;
 use Shoplo\BonanzaApi\Request\ReviseFixedPriceItemRequest;
@@ -35,6 +36,7 @@ use Shoplo\BonanzaApi\Response\GetCategoriesResponse;
 use Shoplo\BonanzaApi\Response\GetCategoryTraitsResponse;
 use Shoplo\BonanzaApi\Response\GetOrdersResponse;
 use Shoplo\BonanzaApi\Response\GetSingleItemResponse;
+use Shoplo\BonanzaApi\Response\GetUnlistedItemResponse;
 use Shoplo\BonanzaApi\Response\GetUserProfileResponse;
 use Shoplo\BonanzaApi\Response\GetUserResponse;
 use Shoplo\BonanzaApi\Response\ReviseFixedPriceItemResponse;
@@ -186,6 +188,11 @@ class BonanzaClient
 	public function getSingleItem(GetSingleItemRequest $request): GetSingleItemResponse
 	{
 		return $this->post(__FUNCTION__, $request);
+	}
+
+	public function getUnlistedItem(GetUnlistedItemRequest $request): GetUnlistedItemResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
 	}
 
 	public function getUser(GetUserRequest $request): GetUserResponse
