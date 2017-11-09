@@ -18,6 +18,7 @@ use Shoplo\BonanzaApi\Request\AddFixedPriceItemRequest;
 use Shoplo\BonanzaApi\Request\EndFixedPriceItemRequest;
 use Shoplo\BonanzaApi\Request\FetchTokenRequest;
 use Shoplo\BonanzaApi\Request\GetBoothItemsRequest;
+use Shoplo\BonanzaApi\Request\GetBoothRequest;
 use Shoplo\BonanzaApi\Request\GetCategoriesRequest;
 use Shoplo\BonanzaApi\Request\GetCategoryTraitsRequest;
 use Shoplo\BonanzaApi\Request\GetOrdersRequest;
@@ -32,6 +33,7 @@ use Shoplo\BonanzaApi\Response\BaseResponse;
 use Shoplo\BonanzaApi\Response\EndFixedPriceItemResponse;
 use Shoplo\BonanzaApi\Response\FetchTokenResponse;
 use Shoplo\BonanzaApi\Response\GetBoothItemsResponse;
+use Shoplo\BonanzaApi\Response\GetBoothResponse;
 use Shoplo\BonanzaApi\Response\GetCategoriesResponse;
 use Shoplo\BonanzaApi\Response\GetCategoryTraitsResponse;
 use Shoplo\BonanzaApi\Response\GetOrdersResponse;
@@ -163,6 +165,11 @@ class BonanzaClient
 		$class = sprintf('Shoplo\\BonanzaApi\\Response\\%s', ucfirst($function) . 'Response');
 
 		return $this->serializer->deserialize((string)$rsp->getBody(), $class, 'json');
+	}
+
+	public function getBooth(GetBoothRequest $request): GetBoothResponse
+	{
+		return $this->post(__FUNCTION__, $request);
 	}
 
 	public function getBoothItems(GetBoothItemsRequest $request): GetBoothItemsResponse

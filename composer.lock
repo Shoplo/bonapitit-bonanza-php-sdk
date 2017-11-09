@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "023c5b534f0c90d153c564c23c2b1a2f",
+    "content-hash": "1ee4e141bc922bae60f954a9a166cba6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -451,16 +451,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "1.8.1",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "ce65798f722c836f16d5d7d2e3ca9d21e0fb4331"
+                "reference": "e708d6ef549044974b60a57fdcec2fa165436d57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/ce65798f722c836f16d5d7d2e3ca9d21e0fb4331",
-                "reference": "ce65798f722c836f16d5d7d2e3ca9d21e0fb4331",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/e708d6ef549044974b60a57fdcec2fa165436d57",
+                "reference": "e708d6ef549044974b60a57fdcec2fa165436d57",
                 "shasum": ""
             },
             "require": {
@@ -499,7 +499,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -530,7 +530,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-07-13T11:23:56+00:00"
+            "time": "2017-10-27T07:15:54+00:00"
         },
         {
             "name": "phpcollection/phpcollection",
