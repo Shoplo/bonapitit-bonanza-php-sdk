@@ -27,6 +27,7 @@ use Shoplo\BonanzaApi\Request\GetUnlistedItemRequest;
 use Shoplo\BonanzaApi\Request\GetUserProfileRequest;
 use Shoplo\BonanzaApi\Request\GetUserRequest;
 use Shoplo\BonanzaApi\Request\ReviseFixedPriceItemRequest;
+use Shoplo\BonanzaApi\Request\SetNotificationPreferencesRequest;
 use Shoplo\BonanzaApi\Request\UpdateBoothRequest;
 use Shoplo\BonanzaApi\Response\AddFixedPriceItemResponse;
 use Shoplo\BonanzaApi\Response\BaseResponse;
@@ -42,6 +43,7 @@ use Shoplo\BonanzaApi\Response\GetUnlistedItemResponse;
 use Shoplo\BonanzaApi\Response\GetUserProfileResponse;
 use Shoplo\BonanzaApi\Response\GetUserResponse;
 use Shoplo\BonanzaApi\Response\ReviseFixedPriceItemResponse;
+use Shoplo\BonanzaApi\Response\SetNotificationPreferencesResponse;
 use Shoplo\BonanzaApi\Response\UpdateBoothResponse;
 
 class BonanzaClient
@@ -231,4 +233,9 @@ class BonanzaClient
 	{
 		return $this->post(__FUNCTION__, $request, true);
 	}
+
+    public function setNotificationPreferences(SetNotificationPreferencesRequest $request): SetNotificationPreferencesResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 }
