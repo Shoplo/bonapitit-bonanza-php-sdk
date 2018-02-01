@@ -26,7 +26,7 @@ Please refer to the Bonanza's API docs here: https://api.bonanza.com/docs
 
 For every call you need devID and certID that you can obtain here: https://api.bonanza.com/accounts/new
 
-###Unsecure calls
+### Unsecure calls
 
 ```php
 <?php
@@ -51,7 +51,7 @@ $request->boothId = 'boothName';
 $response = $client->getBoothItems($request);
 ```
 
-###Secure calls
+### Secure calls
 
 To make secure call, you need to obtain user auth token first.
 To receive it, you need to make fetchToken call:
