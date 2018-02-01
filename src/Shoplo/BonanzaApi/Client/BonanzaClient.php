@@ -21,12 +21,14 @@ use Shoplo\BonanzaApi\Request\GetBoothItemsRequest;
 use Shoplo\BonanzaApi\Request\GetBoothRequest;
 use Shoplo\BonanzaApi\Request\GetCategoriesRequest;
 use Shoplo\BonanzaApi\Request\GetCategoryTraitsRequest;
+use Shoplo\BonanzaApi\Request\GetNotificationPreferencesRequest;
 use Shoplo\BonanzaApi\Request\GetOrdersRequest;
 use Shoplo\BonanzaApi\Request\GetSingleItemRequest;
 use Shoplo\BonanzaApi\Request\GetUnlistedItemRequest;
 use Shoplo\BonanzaApi\Request\GetUserProfileRequest;
 use Shoplo\BonanzaApi\Request\GetUserRequest;
 use Shoplo\BonanzaApi\Request\ReviseFixedPriceItemRequest;
+use Shoplo\BonanzaApi\Request\SetNotificationPreferencesRequest;
 use Shoplo\BonanzaApi\Request\UpdateBoothRequest;
 use Shoplo\BonanzaApi\Response\AddFixedPriceItemResponse;
 use Shoplo\BonanzaApi\Response\BaseResponse;
@@ -36,12 +38,14 @@ use Shoplo\BonanzaApi\Response\GetBoothItemsResponse;
 use Shoplo\BonanzaApi\Response\GetBoothResponse;
 use Shoplo\BonanzaApi\Response\GetCategoriesResponse;
 use Shoplo\BonanzaApi\Response\GetCategoryTraitsResponse;
+use Shoplo\BonanzaApi\Response\GetNotificationPreferencesResponse;
 use Shoplo\BonanzaApi\Response\GetOrdersResponse;
 use Shoplo\BonanzaApi\Response\GetSingleItemResponse;
 use Shoplo\BonanzaApi\Response\GetUnlistedItemResponse;
 use Shoplo\BonanzaApi\Response\GetUserProfileResponse;
 use Shoplo\BonanzaApi\Response\GetUserResponse;
 use Shoplo\BonanzaApi\Response\ReviseFixedPriceItemResponse;
+use Shoplo\BonanzaApi\Response\SetNotificationPreferencesResponse;
 use Shoplo\BonanzaApi\Response\UpdateBoothResponse;
 
 class BonanzaClient
@@ -231,4 +235,14 @@ class BonanzaClient
 	{
 		return $this->post(__FUNCTION__, $request, true);
 	}
+
+    public function setNotificationPreferences(SetNotificationPreferencesRequest $request): SetNotificationPreferencesResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
+
+    public function getNotificationPreferences(GetNotificationPreferencesRequest $request): GetNotificationPreferencesResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 }
