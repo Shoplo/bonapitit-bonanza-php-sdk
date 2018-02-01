@@ -236,13 +236,13 @@ class BonanzaClient
 		return $this->post(__FUNCTION__, $request, true);
 	}
 
-    public function setNotificationPreferences(SetNotificationPreferencesRequest $request): SetNotificationPreferencesResponse
-    {
-        return $this->post(__FUNCTION__, $request, true);
-    }
+	public function setNotificationPreferences(SetNotificationPreferencesRequest $request): SetNotificationPreferencesResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
+	}
 
-    public function getNotificationPreferences(GetNotificationPreferencesRequest $request): GetNotificationPreferencesResponse
-    {
-        return $this->post(__FUNCTION__, $request, true);
-    }
+	public function getNotificationPreferences(GetNotificationPreferencesRequest $request): GetNotificationPreferencesResponse
+	{
+		return $this->post(__FUNCTION__, $request, true);
+	}
 }

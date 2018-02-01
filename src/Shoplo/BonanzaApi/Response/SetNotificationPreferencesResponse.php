@@ -3,7 +3,6 @@
 namespace Shoplo\BonanzaApi\Response;
 
 use JMS\Serializer\Annotation as Serializer;
-use Shoplo\BonanzaApi\Type\FixedPriceItemResponseType;
 use Shoplo\BonanzaApi\Type\SetNotificationPreferencesResponseType;
 
 class SetNotificationPreferencesResponse extends BaseResponse

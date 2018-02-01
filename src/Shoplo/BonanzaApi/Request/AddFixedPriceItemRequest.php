@@ -8,15 +8,8 @@ use JMS\Serializer\Annotation as Serializer;
 use Shoplo\BonanzaApi\Type\AddItemType;
 use Shoplo\BonanzaApi\Type\RequesterCredentialsType;
 
-class AddFixedPriceItemRequest
+class AddFixedPriceItemRequest extends SecureRequest
 {
-	/**
-	 * @var RequesterCredentialsType
-	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\RequesterCredentialsType")
-	 */
-	public $requesterCredentials;
-
 	/**
 	 * @var AddItemType
 	 *

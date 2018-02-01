@@ -21,7 +21,6 @@ class Credentials implements CredentialsInterface
 	private $devId;
 
 	/**
-	 * @param string $appId Application ID
 	 * @param string $certId Certificate ID
 	 * @param string $devId Developer ID
 	 */

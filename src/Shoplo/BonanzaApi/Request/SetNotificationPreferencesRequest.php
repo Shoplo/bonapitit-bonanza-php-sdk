@@ -3,21 +3,11 @@
 namespace Shoplo\BonanzaApi\Request;
 
 use JMS\Serializer\Annotation as Serializer;
-use Shoplo\BonanzaApi\Type\AddItemType;
-use Shoplo\BonanzaApi\Type\DeliveryURLDetailsType;
 use Shoplo\BonanzaApi\Type\ApplicationDeliveryPreferencesType;
-use Shoplo\BonanzaApi\Type\RequesterCredentialsType;
 use Shoplo\BonanzaApi\Type\UserDeliveryPreferenceArrayType;
 
-class SetNotificationPreferencesRequest
+class SetNotificationPreferencesRequest extends SecureRequest
 {
-	/**
-	 * @var RequesterCredentialsType
-	 *
-	 * @Serializer\Type("Shoplo\BonanzaApi\Type\RequesterCredentialsType")
-	 */
-	public $requesterCredentials;
-
 	/**
 	 * @var ApplicationDeliveryPreferencesType
 	 *
@@ -25,10 +15,10 @@ class SetNotificationPreferencesRequest
 	 */
 	public $applicationDeliveryPreferences;
 
-    /**
-     * @var UserDeliveryPreferenceArrayType
-     *
-     * @Serializer\Type("Shoplo\BonanzaApi\Type\UserDeliveryPreferenceArrayType")
-     */
-    public $userDeliveryPreferenceArray;
+	/**
+	 * @var UserDeliveryPreferenceArrayType
+	 *
+	 * @Serializer\Type("Shoplo\BonanzaApi\Type\UserDeliveryPreferenceArrayType")
+	 */
+	public $userDeliveryPreferenceArray;
 }
