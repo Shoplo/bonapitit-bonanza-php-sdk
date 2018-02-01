@@ -1,16 +1,16 @@
 <?php
 
-
 namespace Shoplo\BonanzaApi\Type;
-
 
 use JMS\Serializer\Annotation as Serializer;
 
-class ApplicationDeliveryPreferences
+class ApplicationDeliveryPreferencesType
 {
 
     /**
      * @var string
+     *
+     * @Serializer\Type("string")
      */
     public $applicationEnable;
 

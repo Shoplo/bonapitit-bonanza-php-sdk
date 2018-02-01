@@ -2,7 +2,6 @@
 
 namespace Shoplo\BonanzaApi\Enums;
 
-
 class NotificationType
 {
     const ASK_SELLER_QUESTION = 'askSellerQuestion';

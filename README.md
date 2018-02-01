@@ -15,5 +15,7 @@ Package currently has got support for calling Bonanza's methods:
 * reviseFixedPriceItem
 * endFixedPriceItem
 * updateBooth
+* setNotificationPreferences
+* getNotificationPreferences
 
 Please refer to the Bonanza's API docs here: https://api.bonanza.com/docs

@@ -2,7 +2,6 @@
 
 namespace Shoplo\BonanzaApi\Enums;
 
-
 class DeliveryUrlDetailsStatusType
 {
     const STATUS_ENABLE = 'Enable';
