@@ -9,6 +9,8 @@ class NotificationEnableType
 
     /**
      * @var string
+     *
+     * @Serializer\Type("string")
      */
     public $eventEnable;
 
@@ -21,6 +23,8 @@ class NotificationEnableType
 
     /**
      * @var bool
+     *
+     * @Serializer\Type("boolean")
      */
     public $detailed;
 }
