@@ -28,4 +28,11 @@ class FixedPriceItemResponseType extends BaseResponseType
 	 * @Serializer\Type("int")
 	 */
 	public $itemId;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Type("string")
+     */
+	public $message;
 }
