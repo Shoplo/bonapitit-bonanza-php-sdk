@@ -11,7 +11,7 @@ class PrimaryCategoryType
 	/**
 	 * @var int
 	 *
-	 * @Serializer\Type("int")
+	 * @Serializer\Type("string")
 	 */
 	public $categoryId;
 
