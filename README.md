@@ -9,7 +9,7 @@ Package currently has got support for calling Bonanza's methods:
 | getCategories  | no |
 | getCategoryTraits  | no |
 | getSingleItem  | no |
-| getBoothItems  | for basic data - no, for more detailed data - yes|
+| getBoothItems  | yes |
 | getUnlistedItem  | yes |
 | getOrders  | yes |
 | getUser  | yes |

@@ -6,7 +6,7 @@ namespace Shoplo\BonanzaApi\Request;
 
 use JMS\Serializer\Annotation as Serializer;
 
-class GetBoothRequest
+class GetBoothRequest extends SecureRequest
 {
 	/**
 	 * @var string

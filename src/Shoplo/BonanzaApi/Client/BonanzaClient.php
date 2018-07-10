@@ -1,11 +1,10 @@
 <?php
 
-
 namespace Shoplo\BonanzaApi\Client;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\HandlerStack;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
@@ -51,112 +50,112 @@ use Shoplo\BonanzaApi\Response\UpdateBoothResponse;
 
 class BonanzaClient
 {
-	const HEADER_DEV_ID  = 'X-BONANZLE-API-DEV-NAME';
-	const HEADER_CERT_ID = 'X-BONANZLE-API-CERT-NAME';
+    const HEADER_DEV_ID  = 'X-BONANZLE-API-DEV-NAME';
+    const HEADER_CERT_ID = 'X-BONANZLE-API-CERT-NAME';
 
-	/**
-	 * @var HandlerStack
-	 */
-	protected $stack;
+    /**
+     * @var HandlerStack
+     */
+    protected $stack;
 
-	/**
-	 * @var CredentialsInterface
-	 */
-	protected $credentials;
+    /**
+     * @var CredentialsInterface
+     */
+    protected $credentials;
 
-	/**
-	 * @var string
-	 */
-	private $apiUrl = 'api.bonanza.com/api_requests/';
+    /**
+     * @var string
+     */
+    private $apiUrl = 'api.bonanza.com/api_requests/';
 
-	/**
-	 * @var Client
-	 */
-	private $client;
+    /**
+     * @var Client
+     */
+    private $client;
 
-	/**
-	 * @var SerializerInterface
-	 */
-	private $serializer;
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
 
-	/**
-	 * @param SerializerInterface $serializer
-	 * @param $devId
-	 * @param $certID
-	 *
-	 */
-	public function __construct(CredentialsInterface $credentials)
-	{
-		$this->credentials = $credentials;
-		$this->serializer  = SerializerBuilder::create()
-		                                      ->setPropertyNamingStrategy(
-			                                      new SerializedNameAnnotationStrategy(
-				                                      new IdenticalPropertyNamingStrategy()
-			                                      )
-		                                      )
-		                                      ->build();
+    /**
+     * @param SerializerInterface $serializer
+     * @param $devId
+     * @param $certID
+     *
+     */
+    public function __construct(CredentialsInterface $credentials)
+    {
+        $this->credentials = $credentials;
+        $this->serializer  = SerializerBuilder::create()
+                                              ->setPropertyNamingStrategy(
+                                                  new SerializedNameAnnotationStrategy(
+                                                      new IdenticalPropertyNamingStrategy()
+                                                  )
+                                              )
+                                              ->build();
 
-		$stack = HandlerStack::create();
+        $stack = HandlerStack::create();
 
-		$stack->push(function (callable $handler) {
-			return function (RequestInterface $request, array $options) use ($handler) {
-				$request = $request->withHeader(self::HEADER_DEV_ID, $this->credentials->getDevId());
+        $stack->push(
+            function (callable $handler) {
+                return function (RequestInterface $request, array $options) use ($handler) {
+                    $request = $request->withHeader(self::HEADER_DEV_ID, $this->credentials->getDevId());
 
-				if ($this->credentials->getCertId())
-				{
-					$request = $request->withHeader(self::HEADER_CERT_ID, $this->credentials->getCertId());
-				}
+                    if ($this->credentials->getCertId()) {
+                        $request = $request->withHeader(self::HEADER_CERT_ID, $this->credentials->getCertId());
+                    }
 
-				return $handler($request, $options);
-			};
-		});
+                    return $handler($request, $options);
+                };
+            }
+        );
 
-		$this->client = new Client([
-			'base_uri' => $this->apiUrl,
-			'handler'  => $stack,
-		]);
-	}
+        $this->client = new Client(
+            [
+                'base_uri' => $this->apiUrl,
+                'handler'  => $stack,
+            ]
+        );
+    }
 
-	/**
-	 * @return CredentialsInterface
-	 */
-	public function getCredentials()
-	{
-		return $this->credentials;
-	}
+    /**
+     * @return CredentialsInterface
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
+    }
 
-	public function fetchToken(FetchTokenRequest $request): FetchTokenResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function fetchToken(FetchTokenRequest $request): FetchTokenResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	/**
-	 * @param string $function
-	 * @param mixed $data
-	 * @param array $headers
-	 * @param bool $isMultipart
-	 *
-	 * @return mixed
-	 */
-	private function post($function, $data, $isSecure = false, array $headers = []): BaseResponse
-	{
-		if ($isSecure)
-		{
-			if (!$this->credentials->getCertId())
-			{
-				throw new SecureRequestException("You have to provide app certificate ID to make that secure call");
-			}
-			$url = 'https://' . $this->apiUrl . 'secure_request';
-		}
-		else
-		{
-			$url = 'http://' . $this->apiUrl . 'standard_request';
-		}
+    /**
+     * @param string $function
+     * @param mixed $data
+     * @param array $headers
+     * @param bool $isMultipart
+     *
+     * @return mixed
+     * @throws GuzzleException
+     */
+    private function post($function, $data, $isSecure = false, array $headers = []): BaseResponse
+    {
+        if ($isSecure) {
+            if (!$this->credentials->getCertId()) {
+                throw new SecureRequestException("You have to provide app certificate ID to make that secure call");
+            }
+            $url = 'https://'.$this->apiUrl.'secure_request';
+        } else {
+            $url = 'http://'.$this->apiUrl.'standard_request';
+        }
 
-		$context = new SerializationContext();
-		$context->setSerializeNull(false);
+        $context = new SerializationContext();
+        $context->setSerializeNull(false);
 
-		$data = $this->serializer->serialize($data, 'json', $context);
+        $data = $this->serializer->serialize($data, 'json', $context);
 
         try {
             $rsp = $this->client->request(
@@ -168,86 +167,90 @@ class BonanzaClient
                 ]
             );
         } catch (GuzzleException $e) {
-
+            if ($e instanceof ServerException) {
+                $rsp = $e->getResponse();
+            } else {
+                throw $e;
+            }
         }
 
-        $class = sprintf('Shoplo\\BonanzaApi\\Response\\%s', ucfirst($function) . 'Response');
+        $class = sprintf('Shoplo\\BonanzaApi\\Response\\%s', ucfirst($function).'Response');
 
-		return $this->serializer->deserialize((string)$rsp->getBody(), $class, 'json');
-	}
+        return $this->serializer->deserialize((string)$rsp->getBody(), $class, 'json');
+    }
 
-	public function getBooth(GetBoothRequest $request): GetBoothResponse
-	{
-		return $this->post(__FUNCTION__, $request, $request->requesterCredentials !== null);
-	}
+    public function getBooth(GetBoothRequest $request): GetBoothResponse
+    {
+        return $this->post(__FUNCTION__, $request, $request->requesterCredentials !== null);
+    }
 
-	public function getBoothItems(GetBoothItemsRequest $request): GetBoothItemsResponse
-	{
-		return $this->post(__FUNCTION__, $request, $request->requesterCredentials !== null);
-	}
+    public function getBoothItems(GetBoothItemsRequest $request): GetBoothItemsResponse
+    {
+        return $this->post(__FUNCTION__, $request, $request->requesterCredentials !== null);
+    }
 
-	public function getCategories(GetCategoriesRequest $request): GetCategoriesResponse
-	{
-		return $this->post(__FUNCTION__, $request);
-	}
+    public function getCategories(GetCategoriesRequest $request): GetCategoriesResponse
+    {
+        return $this->post(__FUNCTION__, $request);
+    }
 
-	public function getCategoryTraits(GetCategoryTraitsRequest $request): GetCategoryTraitsResponse
-	{
-		return $this->post(__FUNCTION__, $request);
-	}
+    public function getCategoryTraits(GetCategoryTraitsRequest $request): GetCategoryTraitsResponse
+    {
+        return $this->post(__FUNCTION__, $request);
+    }
 
-	public function getOrders(GetOrdersRequest $request): GetOrdersResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function getOrders(GetOrdersRequest $request): GetOrdersResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function getSingleItem(GetSingleItemRequest $request): GetSingleItemResponse
-	{
-		return $this->post(__FUNCTION__, $request);
-	}
+    public function getSingleItem(GetSingleItemRequest $request): GetSingleItemResponse
+    {
+        return $this->post(__FUNCTION__, $request);
+    }
 
-	public function getUnlistedItem(GetUnlistedItemRequest $request): GetUnlistedItemResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function getUnlistedItem(GetUnlistedItemRequest $request): GetUnlistedItemResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function getUser(GetUserRequest $request): GetUserResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function getUser(GetUserRequest $request): GetUserResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function getUserProfile(GetUserProfileRequest $request): GetUserProfileResponse
-	{
-		return $this->post(__FUNCTION__, $request);
-	}
+    public function getUserProfile(GetUserProfileRequest $request): GetUserProfileResponse
+    {
+        return $this->post(__FUNCTION__, $request);
+    }
 
-	public function reviseFixedPriceItem(ReviseFixedPriceItemRequest $request): ReviseFixedPriceItemResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function reviseFixedPriceItem(ReviseFixedPriceItemRequest $request): ReviseFixedPriceItemResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function addFixedPriceItem(AddFixedPriceItemRequest $request): AddFixedPriceItemResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function addFixedPriceItem(AddFixedPriceItemRequest $request): AddFixedPriceItemResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function endFixedPriceItem(EndFixedPriceItemRequest $request): EndFixedPriceItemResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function endFixedPriceItem(EndFixedPriceItemRequest $request): EndFixedPriceItemResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function updateBooth(UpdateBoothRequest $request): UpdateBoothResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function updateBooth(UpdateBoothRequest $request): UpdateBoothResponse
+    {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function setNotificationPreferences(SetNotificationPreferencesRequest $request): SetNotificationPreferencesResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function setNotificationPreferences(SetNotificationPreferencesRequest $request
+    ): SetNotificationPreferencesResponse {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 
-	public function getNotificationPreferences(GetNotificationPreferencesRequest $request): GetNotificationPreferencesResponse
-	{
-		return $this->post(__FUNCTION__, $request, true);
-	}
+    public function getNotificationPreferences(GetNotificationPreferencesRequest $request
+    ): GetNotificationPreferencesResponse {
+        return $this->post(__FUNCTION__, $request, true);
+    }
 }

@@ -8,10 +8,17 @@ use JMS\Serializer\Annotation as Serializer;
 
 class ErrorMessageType
 {
-	/**
-	 * @var array
-	 *
-	 * @Serializer\Type("array<Shoplo\BonanzaApi\Type\ErrorType>")
-	 */
-	public $error;
+    /**
+     * @var string
+     *
+     * @Serializer\Type("string")
+     */
+    public $message;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Type("string")
+     */
+    public $type;
 }
