@@ -5,6 +5,7 @@ namespace Shoplo\BonanzaApi\Client;
 
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
@@ -157,23 +158,27 @@ class BonanzaClient
 
 		$data = $this->serializer->serialize($data, 'json', $context);
 
-		$rsp = $this->client->request(
-			'POST',
-			$url,
-			[
-				'body'    => lcfirst($function) . '=' . $data,
-				'headers' => $headers,
-			]
-		);
+        try {
+            $rsp = $this->client->request(
+                'POST',
+                $url,
+                [
+                    'body'    => lcfirst($function).'='.$data,
+                    'headers' => $headers,
+                ]
+            );
+        } catch (GuzzleException $e) {
 
-		$class = sprintf('Shoplo\\BonanzaApi\\Response\\%s', ucfirst($function) . 'Response');
+        }
+
+        $class = sprintf('Shoplo\\BonanzaApi\\Response\\%s', ucfirst($function) . 'Response');
 
 		return $this->serializer->deserialize((string)$rsp->getBody(), $class, 'json');
 	}
 
 	public function getBooth(GetBoothRequest $request): GetBoothResponse
 	{
-		return $this->post(__FUNCTION__, $request);
+		return $this->post(__FUNCTION__, $request, $request->requesterCredentials !== null);
 	}
 
 	public function getBoothItems(GetBoothItemsRequest $request): GetBoothItemsResponse
